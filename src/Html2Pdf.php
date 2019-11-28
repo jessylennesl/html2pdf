@@ -6004,7 +6004,11 @@ class Html2Pdf
         $prop = $this->parsingCss->getFormStyle();
 
         $prop['multiline'] = true;
-        $prop['value'] = $level[0]->getParam('txt', '');
+        $prop['value'] = '';
+        // A textarea may be empty
+        if (isset($level[0])) {
+            $prop['value'] = $level[0]->getParam('txt', '');
+        }
 
         $this->pdf->TextField($param['name'], $w, $h, $prop, array(), $x, $y);
 
